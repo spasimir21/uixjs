@@ -1,6 +1,6 @@
 {
   "name": "@uixjs/router",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The router package used in Uix.js",
   "main": "./dist/index.js",
   "scripts": {
@@ -11,8 +11,8 @@
     "/dist"
   ],
   "dependencies": {
-    "@uixjs/reactivity": "^0.0.1",
-    "@uixjs/core": "^0.0.1"
+    "@uixjs/reactivity": "^0.0.2",
+    "@uixjs/core": "^0.0.2"
   },
   "devDependencies": {
     "typescript": "^5.1.3"

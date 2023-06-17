@@ -1,6 +1,6 @@
 {
   "name": "@uixjs/parcel-transformer-uix-stylesheet",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A parcel transformer for Uix.js stylesheets",
   "main": "./dist/index.js",
   "scripts": {

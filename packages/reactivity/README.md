@@ -1,6 +1,6 @@
 # @uixjs/reactivity
 
-The reactive programming package used in Uix.js
+The reactive programming package used in [Uix.js](https://github.com/spasimir21/uixjs)
 
 # Notes
 

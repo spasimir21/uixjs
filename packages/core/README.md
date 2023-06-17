@@ -1,6 +1,6 @@
 # @uixjs/core
 
-A web UI library designed for reactive programming
+A web UI library designed for reactive programming - [Uix.js](https://github.com/spasimir21/uixjs)
 
 # Notes
 

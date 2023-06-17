@@ -1,6 +1,6 @@
 {
   "name": "@uixjs/parcel-transformer-uix-view",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A parcel transformer for Uix.js views",
   "main": "./dist/plugin.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "/dist"
   ],
   "dependencies": {
-    "@uixjs/parcel-transformer-uix-stylesheet": "^0.0.2",
+    "@uixjs/parcel-transformer-uix-stylesheet": "^0.0.3",
     "@minify-html/node": "^0.11.1",
     "@parcel/plugin": "^2.5.0",
     "css-select": "^5.1.0",

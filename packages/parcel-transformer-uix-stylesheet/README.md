@@ -1,6 +1,6 @@
 # @uixjs/parcel-transformer-uix-stylesheet
 
-A parcel transformer for Uix.js stylesheets
+A parcel transformer for [Uix.js](https://github.com/spasimir21/uixjs) stylesheets
 
 # Notes
 
