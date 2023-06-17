@@ -1,0 +1,28 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "uix.injection.insert-tag",
+  "injectionSelector": "L:text.html -meta",
+  "patterns": [
+    {
+      "include": "#insert-tag"
+    }
+  ],
+  "repository": {
+    "insert-tag": {
+      "begin": "(<)(insert)(>)",
+      "end": "(</)(insert)(>)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.html" },
+        "2": { "name": "storage.type" },
+        "3": { "name": "punctuation.definition.tag.end.html" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.html" },
+        "2": { "name": "storage.type" },
+        "3": { "name": "punctuation.definition.tag.end.html" }
+      },
+      "patterns": [{ "include": "source.js" }],
+      "name": "insert-tag"
+    }
+  }
+}

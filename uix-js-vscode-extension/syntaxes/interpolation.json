@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "uix.injection.interpolation",
+  "injectionSelector": "L:text.html -meta",
+  "patterns": [
+    {
+      "include": "#text-interpolation"
+    }
+  ],
+  "repository": {
+    "text-interpolation": {
+      "begin": "\\$\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "0": { "name": "punctuation.interpolation.open" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation.interpolation.open" }
+      },
+      "patterns": [{ "include": "source.js" }],
+      "name": "interpolation"
+    }
+  }
+}

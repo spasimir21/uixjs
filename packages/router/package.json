@@ -1,0 +1,30 @@
+{
+  "name": "@uixjs/router",
+  "version": "0.0.1",
+  "description": "The router package used in Uix.js",
+  "main": "./dist/index.js",
+  "scripts": {
+    "watch": "tsc -w",
+    "build": "tsc"
+  },
+  "files": [
+    "/dist"
+  ],
+  "dependencies": {
+    "@uixjs/reactivity": "^0.0.1",
+    "@uixjs/core": "^0.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.3"
+  },
+  "homepage": "https://github.com/spasimir21/uixjs/tree/main/packages/router",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spasimir21/uixjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/spasimir21/uixjs/issues"
+  },
+  "author": "Spasimir Pavlov",
+  "license": "MIT"
+}

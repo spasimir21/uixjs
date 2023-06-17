@@ -1,0 +1,36 @@
+{
+  "name": "@uixjs/parcel-transformer-uix-view",
+  "version": "0.0.2",
+  "description": "A parcel transformer for Uix.js views",
+  "main": "./dist/plugin.js",
+  "scripts": {
+    "watch": "tsc -w",
+    "build": "tsc"
+  },
+  "files": [
+    "/dist"
+  ],
+  "dependencies": {
+    "@uixjs/parcel-transformer-uix-stylesheet": "^0.0.2",
+    "@minify-html/node": "^0.11.1",
+    "@parcel/plugin": "^2.5.0",
+    "css-select": "^5.1.0",
+    "he": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/entities": "^2.0.0",
+    "@types/he": "^1.2.0",
+    "@types/node": "^20.3.1",
+    "typescript": "^5.1.3"
+  },
+  "homepage": "https://github.com/spasimir21/uixjs/tree/main/packages/parcel-transformer-uix-view",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spasimir21/uixjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/spasimir21/uixjs/issues"
+  },
+  "author": "Spasimir Pavlov",
+  "license": "MIT"
+}

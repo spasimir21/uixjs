@@ -1,0 +1,94 @@
+{
+  "name": "uix-js-vscode-extension",
+  "displayName": "Uix.js Support",
+  "description": "",
+  "version": "0.0.1",
+  "main": "./index.js",
+  "icon": "./icon.png",
+  "engines": {
+    "vscode": "^1.7.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onCommand:uix.addVsCodeSettings",
+    "onCommand:uix.addShims",
+    "onCommand:uix.addParcelConfig",
+    "onCommand:uix.addComponent"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "uix.addVsCodeSettings",
+        "title": "Uix.js: Add VsCode Settings"
+      },
+      {
+        "command": "uix.addShims",
+        "title": "Uix.js: Add Shims"
+      },
+      {
+        "command": "uix.addParcelConfig",
+        "title": "Uix.js: Add Parcel Config"
+      },
+      {
+        "command": "uix.addComponent",
+        "title": "Uix.js: Add Component"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "uix.addComponent"
+        },
+        {
+          "command": "uix.addShims"
+        }
+      ]
+    },
+    "grammars": [
+      {
+        "scopeName": "uix.injection.interpolation",
+        "path": "./syntaxes/interpolation.json",
+        "injectTo": [
+          "text.html"
+        ]
+      },
+      {
+        "scopeName": "uix.injection.insert-tag",
+        "path": "./syntaxes/insert-tag.json",
+        "injectTo": [
+          "text.html"
+        ]
+      },
+      {
+        "scopeName": "uix.injection.attribute-bindings",
+        "path": "./syntaxes/attribute-bindings.json",
+        "injectTo": [
+          "text.html"
+        ]
+      },
+      {
+        "scopeName": "uix.injection.special-tags",
+        "path": "./syntaxes/special-tags.json",
+        "injectTo": [
+          "text.html"
+        ]
+      }
+    ]
+  },
+  "devDependencies": {
+    "vscode": "^1.1.37"
+  },
+  "homepage": "https://github.com/spasimir21/uixjs/tree/main/uix-js-vscode-extension",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spasimir21/uixjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/spasimir21/uixjs/issues"
+  },
+  "publisher": "spasimir-pavlov",
+  "author": "Spasimir Pavlov",
+  "license": "MIT"
+}

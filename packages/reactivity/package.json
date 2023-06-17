@@ -1,0 +1,26 @@
+{
+  "name": "@uixjs/reactivity",
+  "version": "0.0.1",
+  "description": "The reactive programming package used in Uix.js",
+  "main": "./dist/index.js",
+  "scripts": {
+    "watch": "tsc -w",
+    "build": "tsc"
+  },
+  "files": [
+    "/dist"
+  ],
+  "devDependencies": {
+    "typescript": "^5.1.3"
+  },
+  "homepage": "https://github.com/spasimir21/uixjs/tree/main/packages/reactivity",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spasimir21/uixjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/spasimir21/uixjs/issues"
+  },
+  "author": "Spasimir Pavlov",
+  "license": "MIT"
+}
