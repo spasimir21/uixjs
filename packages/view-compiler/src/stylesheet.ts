@@ -23,11 +23,19 @@ interface CodeStylesheetData {
 
 type StylesheetData = LinkedStylesheetData | CodeStylesheetData;
 
-async function compileStylesheet(stylesheet: StylesheetData) {
-  if (stylesheet.type === StylesheetType.Link) {
-    const query = stylesheet.styleScopeId == null ? '' : `?styleScopeId=${stylesheet.styleScopeId}`;
-    return `import ${stylesheet.id}Stylesheet from 'uix-stylesheet:${stylesheet.href}${query}';`;
-  }
+type StylesheetResolver = (path: string, styleScopeId: string | null) => string;
+
+const resolveUixStylesheet: StylesheetResolver = (path, styleScopeId) => {
+  const query = styleScopeId == null ? '' : `?styleScopeId=${styleScopeId}`;
+  return `uix-stylesheet:${path}${query}`;
+};
+
+async function compileStylesheet(
+  stylesheet: StylesheetData,
+  resolveStylesheet: StylesheetResolver = resolveUixStylesheet
+) {
+  if (stylesheet.type === StylesheetType.Link)
+    return `import ${stylesheet.id}Stylesheet from '${resolveStylesheet(stylesheet.href, stylesheet.styleScopeId)}';`;
 
   let cssCode = stylesheet.code;
   if (stylesheet.styleScopeId != null) cssCode = await scopeCss(cssCode, stylesheet.styleScopeId);
@@ -44,4 +52,4 @@ async function compileStylesheetModule(source: string, styleScopeId: string | nu
   return `import * as u from '@uixjs/core';\nexport default u.defineStylesheet(${stylesheetDataCode});`;
 }
 
-export { StylesheetData, StylesheetType, compileStylesheet, compileStylesheetModule };
+export { StylesheetData, StylesheetType, compileStylesheet, compileStylesheetModule, StylesheetResolver };

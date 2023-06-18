@@ -31,6 +31,8 @@ class UixComponent extends HTMLElement {
   readonly props: any = {};
   @State
   readonly shared: any = {};
+  @State
+  readonly slots: Record<string, ChildNode> = {};
 
   context: any = reactive({});
 

@@ -2,7 +2,7 @@
   "name": "uix-js-vscode-extension",
   "displayName": "Uix.js Support",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main": "./index.js",
   "icon": "./icon.png",
   "engines": {
@@ -62,15 +62,22 @@
         ]
       },
       {
-        "scopeName": "uix.injection.attribute-bindings",
-        "path": "./syntaxes/attribute-bindings.json",
+        "scopeName": "uix.injection.special-tags",
+        "path": "./syntaxes/special-tags.json",
         "injectTo": [
           "text.html"
         ]
       },
       {
-        "scopeName": "uix.injection.special-tags",
-        "path": "./syntaxes/special-tags.json",
+        "scopeName": "uix.injection.each-attributes",
+        "path": "./syntaxes/each-attributes.json",
+        "injectTo": [
+          "text.html"
+        ]
+      },
+      {
+        "scopeName": "uix.injection.attribute-bindings",
+        "path": "./syntaxes/attribute-bindings.json",
         "injectTo": [
           "text.html"
         ]

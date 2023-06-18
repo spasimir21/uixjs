@@ -2,6 +2,7 @@ import { $IS_REACTIVE, $RAW, isReactive, markReactive, setRaw } from './flags';
 import { SubscribableNode } from './nodes/SubscribableNode';
 import { ConstructorMap } from './utils/ConstructorMap';
 import { ReactiveSet } from './reactive/ReactiveSet';
+import { makeArrayReactive } from './reactive/Array';
 import { TrackStack } from './TrackStack';
 import { isEqual } from './equal';
 
@@ -105,8 +106,8 @@ function reactive<T>(object: T): T {
   return reactiveObject;
 }
 
-// TODO: Add better support for Array, Map
-MakeReactiveConstructorMap.set(Array, makeObjectReactive);
+// TODO: Add better support for Map
+MakeReactiveConstructorMap.set(Array, array => makeArrayReactive(array));
 MakeReactiveConstructorMap.set(Set, set => new ReactiveSet(set));
 
 export { MakeReactiveConstructorMap, reactive };

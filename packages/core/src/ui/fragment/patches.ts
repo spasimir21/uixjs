@@ -40,3 +40,17 @@ CharacterData.prototype.replaceWith = function (...nodes: (string | Node)[]) {
 
   for (const node of nodes) if (node instanceof Fragment) node.insertNodes();
 };
+
+const _Element_remove = Element.prototype.remove;
+
+Element.prototype.remove = function () {
+  if ((this as any).fragmentParent != null) ((this as any).fragmentParent as Fragment).removeChild(this);
+  else _Element_remove.apply(this);
+};
+
+const _CharacterData_remove = CharacterData.prototype.remove;
+
+CharacterData.prototype.remove = function () {
+  if ((this as any).fragmentParent != null) ((this as any).fragmentParent as Fragment).removeChild(this);
+  else _CharacterData_remove.apply(this);
+};

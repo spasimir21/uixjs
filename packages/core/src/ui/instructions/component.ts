@@ -1,12 +1,11 @@
 import { UixComponent } from '../component/Component';
-import { Controller } from '../../Controller';
 import { Registry } from '../../Registry';
 import { context } from '../../context';
 
 function component(
   elements: Record<string, HTMLElement>,
   placeholderId: string,
-  data: Controller & { styleScopeId: string },
+  data: any,
   componentName: string,
   otherRegistry?: Registry | string
 ) {
@@ -22,6 +21,8 @@ function component(
 
   elements[placeholderId].replaceWith(newComponent);
   elements[placeholderId] = newComponent;
+
+  data[placeholderId] = newComponent;
 
   return newComponent.kill.bind(newComponent);
 }

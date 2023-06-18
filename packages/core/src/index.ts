@@ -7,8 +7,10 @@ export * from './ui/component/Component';
 export * from './ui/fragment/Fragment';
 
 export * from './ui/instructions/booleanAttribute';
+export * from './ui/instructions/_forEachKeyed';
 export * from './ui/instructions/styleProperty';
 export * from './ui/instructions/textContent';
+export * from './ui/instructions/slotContent';
 export * from './ui/instructions/bindDirect';
 export * from './ui/instructions/attribute';
 export * from './ui/instructions/bindInput';
@@ -20,6 +22,7 @@ export * from './ui/instructions/_export';
 export * from './ui/instructions/_class';
 export * from './ui/instructions/shared';
 export * from './ui/instructions/event';
+export * from './ui/instructions/slot';
 export * from './ui/instructions/prop';
 export * from './ui/instructions/ref';
 export * from './ui/instructions/if';

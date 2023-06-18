@@ -1,23 +1,15 @@
 import { getElementViewSelector } from '../elementViewId';
 import { Node, HTMLElement } from '../node-html-parser';
-import { processElement } from './processElement';
-import { ViewData, createView } from '../view';
+import { viewFromElement } from '../viewFromElement';
 import { ViewModuleData } from '../module';
 import { markRemoved } from '../removed';
-import { id } from '../id';
+import { ViewData } from '../view';
 
 function processElementChain(elementChain: HTMLElement[], viewModule: ViewModuleData): [string | null, ViewData][] {
   const chain: [string | null, ViewData][] = [];
 
   for (const element of elementChain) {
-    const viewFragment = new HTMLElement(null as any, {}, '', null, [0, 0]);
-    for (const node of element.childNodes) viewFragment.appendChild(node);
-
-    const viewId = id();
-    const view = createView(viewId, viewFragment);
-    viewModule.views.unshift(view);
-
-    processElement(viewFragment, view, viewModule);
+    const view = viewFromElement(element, viewModule);
 
     const condition = element.getAttribute('_') ?? null;
 

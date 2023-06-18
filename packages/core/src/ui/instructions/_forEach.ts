@@ -15,7 +15,7 @@ function _forEach(
   const viewInstances: ViewInstance<any>[] = [];
   const fragment = new Fragment([]);
 
-  const emptyViewElement = emptyViewInstance ? viewToElement(emptyViewInstance) : document.createComment('each');
+  const emptyViewElement = emptyViewInstance ? viewToElement(emptyViewInstance) : document.createComment('');
 
   let currentMounted = placeholder as ChildNode;
   currentMounted.replaceWith(document.createComment(''), currentMounted);
@@ -54,7 +54,7 @@ function _forEach(
   return () => {
     effectCleanup();
 
-    for (let i = 0; i < viewInstances.length; i++) fragment.removeChild(fragment.nodes[fragment.nodes.length - 1]);
+    while (fragment.nodes.length > 0) fragment.removeChildAtIndex(1);
     if (emptyViewInstance) emptyViewInstance.cleanup();
     for (const view of viewInstances) view.cleanup();
   };

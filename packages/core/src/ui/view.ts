@@ -1,13 +1,15 @@
 import { Fragment } from './fragment/Fragment';
 import { scope } from '../scope';
 
+type ViewData<T> = T & { styleScopeId: string; view: View<T> };
+
 type ViewInstructionsFunction<T> = (elements: Record<string, HTMLElement>, data: T) => ((() => void) | void)[];
 
 interface ViewInstance<T> {
   view: View<T>;
   rootElement: HTMLDivElement;
   elements: Record<string, HTMLElement>;
-  data: T;
+  data: ViewData<T>;
   cleanup: () => void;
 }
 
@@ -81,7 +83,7 @@ function instantiateView<T>(view: View<T>, data: T): ViewInstance<T> {
     view,
     rootElement,
     elements,
-    data,
+    data: data as any,
     cleanup
   };
 }

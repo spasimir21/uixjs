@@ -1,6 +1,7 @@
-import { processComponent, processComponentInit } from './component';
+import { processComponent, processComponentInit, skipComponentChildren } from './component';
 import { processBooleanAttributes } from './booleanAttribute';
 import { processComponentTag } from './componentTag';
+import { processSlotContent } from './slotContent';
 import { processStyleProps } from './styleProp';
 import { processModifiers } from './modifiers';
 import { processComments } from './comment';
@@ -20,6 +21,7 @@ import { processStyle } from './style';
 import { processProps } from './prop';
 import { processEach } from './_each';
 import { processText } from './text';
+import { processSlot } from './slot';
 import { processRef } from './ref';
 import { ViewData } from '../view';
 import { processIf } from './if';
@@ -34,6 +36,8 @@ const PROCESSORS: Processor[] = [
   processStyle,
   processIf,
   processEach,
+  processSlot,
+  processSlotContent,
   processComponent,
   processAttributes,
   processBooleanAttributes,
@@ -48,7 +52,8 @@ const PROCESSORS: Processor[] = [
   processShared,
   processComponentInit,
   processExports,
-  processComponentTag
+  processComponentTag,
+  skipComponentChildren
 ];
 
 function processElement(node: Node, view: ViewData, viewModule: ViewModuleData) {

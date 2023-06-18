@@ -31,7 +31,9 @@ function processEvents(element: Node, view: ViewData) {
     const callbackCode =
       eventFunctions.length > 0 ? `{${eventFunctions.map(f => `e.${f}()`).join(';')};${code}}` : `(${code})`;
 
-    view.instructions.push(`u._event(${viewSelector}, '${eventName}', e => ${callbackCode}, { once: ${once} })`);
+    const optionsCode = once ? '{ once: true }' : '';
+
+    view.instructions.push(`u._event(${viewSelector}, '${eventName}', e => ${callbackCode}, ${optionsCode})`);
 
     element.removeAttribute(attribName);
   }

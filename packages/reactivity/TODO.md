@@ -1,6 +1,6 @@
 # TODO
 
-- Implement custom reactivity handlers for Array, Map and more
+- Implement custom reactivity handlers for Map and more
 - Polish
 - Do more testing
 - Add documentation and API reference

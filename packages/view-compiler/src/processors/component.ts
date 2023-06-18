@@ -1,10 +1,20 @@
 import { getElementViewId, getElementViewSelector } from '../elementViewId';
 import { isCustomComponent } from '../isCustomComponent';
 import { Node, HTMLElement } from '../node-html-parser';
+import { ComponentIdStack } from '../componentIdStack';
+import { processElement } from './processElement';
 import { ViewModuleData } from '../module';
 import { ViewData } from '../view';
 
 const $IS_COMPONENT = Symbol('$IS_COMPONENT');
+
+function markComponent(object: any) {
+  object[$IS_COMPONENT] = true;
+}
+
+function isComponent(object: any) {
+  return object[$IS_COMPONENT] === true;
+}
 
 function processComponent(element: Node, view: ViewData, viewModule: ViewModuleData) {
   if (!(element instanceof HTMLElement) || element.tagName == null) return false;
@@ -26,7 +36,13 @@ function processComponent(element: Node, view: ViewData, viewModule: ViewModuleD
   );
 
   element.tagName = 'PLCH';
-  (element as any)[$IS_COMPONENT] = true;
+  markComponent(element);
+
+  ComponentIdStack.push(viewId);
+
+  for (const node of element.childNodes) processElement(node, view, viewModule);
+
+  ComponentIdStack.pop();
 
   return false;
 }
@@ -40,4 +56,8 @@ function processComponentInit(element: Node, view: ViewData) {
   return false;
 }
 
-export { processComponent, processComponentInit };
+function skipComponentChildren(element: Node) {
+  return isComponent(element);
+}
+
+export { processComponent, processComponentInit, skipComponentChildren };

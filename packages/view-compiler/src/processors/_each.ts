@@ -1,23 +1,9 @@
 import { getElementViewSelector } from '../elementViewId';
 import { Node, HTMLElement } from '../node-html-parser';
-import { processElement } from './processElement';
-import { ViewData, createView } from '../view';
+import { viewFromElement } from '../viewFromElement';
 import { ViewModuleData } from '../module';
 import { markRemoved } from '../removed';
-import { id } from '../id';
-
-function viewFromElement(element: HTMLElement, viewModule: ViewModuleData) {
-  const viewFragment = new HTMLElement(null as any, {}, '', null, [0, 0]);
-  for (const node of element.childNodes) viewFragment.appendChild(node);
-
-  const viewId = id();
-  const view = createView(viewId, viewFragment);
-  viewModule.views.unshift(view);
-
-  processElement(viewFragment, view, viewModule);
-
-  return view;
-}
+import { ViewData } from '../view';
 
 function processEach(element: Node, view: ViewData, viewModule: ViewModuleData) {
   if (!(element instanceof HTMLElement) || element.tagName !== 'EACH') return false;
@@ -35,10 +21,19 @@ function processEach(element: Node, view: ViewData, viewModule: ViewModuleData) 
   const eachCondition = codeParts.slice(1).join(':');
   const iteratorKey = codeParts[0].trim();
 
-  // prettier-ignore
-  view.instructions.push(
-    `u._forEach(${elementViewSelector}, $, '${iteratorKey}', () => (${eachCondition}), ${eachView.name}View, ${elseViewCode})`
-  );
+  const key = element.hasAttribute('key') ? element.getAttribute('key') : null;
+
+  if (key) {
+    // prettier-ignore
+    view.instructions.push(
+      `u._forEachKeyed(${elementViewSelector}, $, '${iteratorKey}', () => (${eachCondition}), ${iteratorKey} => (${key}), ${eachView.name}View, ${elseViewCode})`
+    );
+  } else {
+    // prettier-ignore
+    view.instructions.push(
+      `u._forEach(${elementViewSelector}, $, '${iteratorKey}', () => (${eachCondition}), ${eachView.name}View, ${elseViewCode})`
+    );
+  }
 
   if (elseElement) {
     elseElement.remove();
@@ -47,6 +42,7 @@ function processEach(element: Node, view: ViewData, viewModule: ViewModuleData) 
 
   element.tagName = 'PLCH';
   element.removeAttribute('_');
+  element.removeAttribute('key');
 
   return true;
 }

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "uix.injection.each-attributes",
+  "injectionSelector": "L:meta.tag.structure.each.start.html",
+  "patterns": [
+    {
+      "include": "#condition-attribute"
+    },
+    {
+      "include": "#key-attribute"
+    }
+  ],
+  "repository": {
+    "condition-attribute": {
+      "begin": "(_\\s*=)\\s*('|\")\\s*(.*?)\\s*(:)\\s*",
+      "end": "(\\2)",
+      "beginCaptures": {
+        "1": { "name": "punctuation" },
+        "2": { "name": "punctuation" },
+        "3": { "name": "variable" },
+        "4": { "name": "storage.type" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation" }
+      },
+      "patterns": [{ "include": "source.js" }],
+      "name": "condition-attribute"
+    },
+    "key-attribute": {
+      "begin": "(key)\\s*(=)\\s*('|\")",
+      "end": "(\\3)",
+      "beginCaptures": {
+        "1": { "name": "entity.other.attribute-name" },
+        "2": { "name": "punctuation" },
+        "3": { "name": "punctuation" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation" }
+      },
+      "patterns": [{ "include": "source.js" }],
+      "name": "key-attribute"
+    }
+  }
+}
