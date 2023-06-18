@@ -88,7 +88,7 @@ function _forEachKeyed(
   return () => {
     effectCleanup();
 
-    while (fragment.nodes.length > 0) fragment.removeChildAtIndex(1);
+    while (fragment.nodes.length > 0) fragment.removeChildAtIndex(0);
     for (const key in viewInstances) viewInstances[key].cleanup();
     if (emptyViewInstance) emptyViewInstance.cleanup();
   };

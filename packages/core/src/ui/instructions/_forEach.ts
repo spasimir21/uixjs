@@ -54,7 +54,7 @@ function _forEach(
   return () => {
     effectCleanup();
 
-    while (fragment.nodes.length > 0) fragment.removeChildAtIndex(1);
+    while (fragment.nodes.length > 0) fragment.removeChildAtIndex(0);
     if (emptyViewInstance) emptyViewInstance.cleanup();
     for (const view of viewInstances) view.cleanup();
   };

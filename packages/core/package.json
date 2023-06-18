@@ -1,6 +1,6 @@
 {
   "name": "@uixjs/core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A web UI library designed for reactive programming",
   "main": "./dist/index.js",
   "scripts": {
