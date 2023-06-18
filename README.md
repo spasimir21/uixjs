@@ -7,6 +7,7 @@ A web UI library designed for reactive programming. Just a little personal proje
 - [@uixjs/reactivity](https://www.npmjs.com/package/@uixjs/reactivity)
 - [@uixjs/core](https://www.npmjs.com/package/@uixjs/core)
 - [@uixjs/router](https://www.npmjs.com/package/@uixjs/router)
+- [@uixjs/view-compiler](https://www.npmjs.com/package/@uixjs/view-compiler)
 - [@uixjs/parcel-transformer-uix-view](https://www.npmjs.com/package/@uixjs/parcel-transformer-uix-view)
 - [@uixjs/parcel-transformer-uix-stylesheet](https://www.npmjs.com/package/@uixjs/parcel-transformer-uix-stylesheet)
 

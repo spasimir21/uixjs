@@ -1,5 +1,6 @@
-import { scopeCss } from '@uixjs/parcel-transformer-uix-stylesheet';
 import { cancelTemplateString } from './cancelTemplateString';
+import { scopeCss } from './scopeCss';
+import { id } from './id';
 
 enum StylesheetType {
   Link,
@@ -36,4 +37,11 @@ async function compileStylesheet(stylesheet: StylesheetData) {
   return `const ${stylesheet.id}Stylesheet = u.defineStylesheet(${stylesheetDataCode});`;
 }
 
-export { StylesheetData, StylesheetType, compileStylesheet };
+async function compileStylesheetModule(source: string, styleScopeId: string | null) {
+  if (styleScopeId != null) source = await scopeCss(source, styleScopeId);
+  // prettier-ignore
+  const stylesheetDataCode = `{ id: '${id()}', type: u.StylesheetType.Code, code: async () => \`${cancelTemplateString(source)}\` }`;
+  return `import * as u from '@uixjs/core';\nexport default u.defineStylesheet(${stylesheetDataCode});`;
+}
+
+export { StylesheetData, StylesheetType, compileStylesheet, compileStylesheetModule };

@@ -1,20 +1,22 @@
+import { compileStylesheetModule } from '@uixjs/view-compiler';
 import { Transformer } from '@parcel/plugin';
-import { scopeCss } from './scopeCss';
-import { compile } from './compile';
 
 const stylesheetTransformer = new Transformer({
   transform: async ({ asset }) => {
     if (asset.type != 'css') return [asset];
 
-    let cssCode = await asset.getCode();
+    const cssCode = await asset.getCode();
 
-    if (asset.query.has('styleScopeId')) cssCode = await scopeCss(cssCode, asset.query.get('styleScopeId') as string);
+    const moduleCode = await compileStylesheetModule(
+      cssCode,
+      asset.query.has('styleScopeId') ? asset.query.get('styleScopeId') : null
+    );
 
     asset.type = 'js';
-    asset.setCode(compile(cssCode));
+    asset.setCode(moduleCode);
 
     return [asset];
   }
 });
 
-export { stylesheetTransformer };
+export default stylesheetTransformer;

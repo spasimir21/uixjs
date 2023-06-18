@@ -1,8 +1,8 @@
 {
   "name": "@uixjs/parcel-transformer-uix-stylesheet",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A parcel transformer for Uix.js stylesheets",
-  "main": "./dist/index.js",
+  "main": "./dist/plugin.js",
   "scripts": {
     "watch": "tsc -w",
     "build": "tsc"
@@ -12,9 +12,7 @@
   ],
   "dependencies": {
     "@parcel/plugin": "^2.5.0",
-    "cssnano": "^6.0.1",
-    "postcss": "^8.4.24",
-    "postcss-selector-parser": "^6.0.13"
+    "@uixjs/view-compiler": "^0.0.1"
   },
   "devDependencies": {
     "typescript": "^5.1.3"
