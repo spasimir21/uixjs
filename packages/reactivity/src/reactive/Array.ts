@@ -54,6 +54,8 @@ function makeArrayReactive(array: any[]): any {
     splice: _splice.bind(_functionThis)
   };
 
+  for (let i = 0; i < array.length; i++) array[i] = reactive(array[i]);
+
   const proxy = new Proxy(array, {
     get(target, prop) {
       if (prop === $IS_REACTIVE) return true;

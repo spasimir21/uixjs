@@ -1,6 +1,7 @@
 import { SubscribableNode } from '../nodes/SubscribableNode';
 import { Reactive } from '../decorations/Reactive';
 import { TrackStack } from '../TrackStack';
+import { reactive } from '../reactive';
 
 @Reactive
 class ReactiveSet<T> extends Set<T> {
@@ -10,6 +11,12 @@ class ReactiveSet<T> extends Set<T> {
 
   constructor(private readonly set: Set<T>) {
     super();
+    const reactiveItems = [];
+
+    for (const item of this.set) reactiveItems.push(reactive(item));
+
+    this.set.clear();
+    for (const item of reactiveItems) this.set.add(item);
   }
 
   override get size() {
