@@ -868,9 +868,7 @@ export default class HTMLElement extends Node {
       this.parentNode.childNodes.splice(idx, 0, ...p.childNodes);
     } else {
       throw new Error(
-        `The value provided ('${
-          where as string
-        }') is not one of 'beforebegin', 'afterbegin', 'beforeend', or 'afterend'`
+        `The value provided ('${where as string}') is not one of 'beforebegin', 'afterbegin', 'beforeend', or 'afterend'`
       );
     }
     return this;
@@ -958,8 +956,7 @@ export default class HTMLElement extends Node {
 }
 
 // https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name
-const kMarkupPattern =
-  /<!--[\s\S]*?-->|<(\/?)([a-zA-Z][-.:0-9_a-zA-Z]*)((?:\s+[^>]*?(?:(?:'[^']*')|(?:"[^"]*"))?)*)\s*(\/?)>/g;
+const kMarkupPattern = /<!--[\s\S]*?-->|<(\/?)([a-zA-Z][-.:0-9_a-zA-Z]*)((?:\s+[^>]*?(?:(?:'[^']*')|(?:"[^"]*"))?)*)\s*(\/?)>/g;
 const kAttributePattern = /(?:^|\s)(id|class)\s*=\s*((?:'[^']*')|(?:"[^"]*")|\S+)/gi;
 const kSelfClosingElements = {
   area: true,
@@ -1173,15 +1170,7 @@ export function base_parse(data: string, options = {} as Partial<Options>) {
 
       currentParent = currentParent.appendChild(
         // Initialize range (end position updated later for closed tags)
-        new HTMLElement(
-          tagName,
-          attrs,
-          attributes.slice(1),
-          null,
-          createRange(tagStartPos, tagEndPos),
-          voidTag,
-          options
-        )
+        new HTMLElement(tagName, attrs, attributes.slice(1), null, createRange(tagStartPos, tagEndPos), voidTag, options)
       );
       stack.push(currentParent);
 

@@ -1,6 +1,6 @@
 {
   "name": "@uixjs/view-compiler",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "A compiler for Uix.js views",
   "main": "./dist/index.js",
   "scripts": {
@@ -11,16 +11,17 @@
     "/dist"
   ],
   "dependencies": {
-    "@minify-html/node": "^0.11.1",
     "css-select": "^5.1.0",
-    "he": "^1.2.0",
     "cssnano": "^6.0.1",
+    "he": "^1.2.0",
+    "html-minifier-terser": "^7.2.0",
     "postcss": "^8.4.24",
     "postcss-selector-parser": "^6.0.13"
   },
   "devDependencies": {
     "@types/entities": "^2.0.0",
     "@types/he": "^1.2.0",
+    "@types/html-minifier-terser": "^7.0.0",
     "@types/node": "^20.3.1",
     "typescript": "^5.1.3"
   },

@@ -1,6 +1,6 @@
 {
   "name": "@uixjs/parcel-transformer-uix-view",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "A parcel transformer for Uix.js views",
   "main": "./dist/plugin.js",
   "scripts": {
@@ -11,8 +11,8 @@
     "/dist"
   ],
   "dependencies": {
-    "@parcel/plugin": "^2.5.0",
-    "@uixjs/view-compiler": "^0.0.2"
+    "@parcel/plugin": "^2.9.3",
+    "@uixjs/view-compiler": "^0.0.4"
   },
   "devDependencies": {
     "typescript": "^5.1.3"

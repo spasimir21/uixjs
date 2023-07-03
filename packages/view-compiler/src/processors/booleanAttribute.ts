@@ -5,9 +5,7 @@ import { ViewData } from '../view';
 function processBooleanAttributes(element: Node, view: ViewData) {
   if (!(element instanceof HTMLElement)) return false;
 
-  const attribsToBeProcessed = Object.keys(element.attributes).filter(
-    attrib => attrib.startsWith('ba:') || attrib.startsWith('bool-attr:')
-  );
+  const attribsToBeProcessed = Object.keys(element.attributes).filter(attrib => attrib.startsWith('bool-attr:'));
 
   if (attribsToBeProcessed.length === 0) return false;
 
@@ -15,9 +13,7 @@ function processBooleanAttributes(element: Node, view: ViewData) {
 
   for (const attribName of attribsToBeProcessed) {
     const attrName = attribName.split(':').slice(1).join(':');
-    view.instructions.push(
-      `u.booleanAttribute(${viewSelector}, '${attrName}', () => (${element.getAttribute(attribName)}))`
-    );
+    view.instructions.push(`u.booleanAttribute(${viewSelector}, '${attrName}', () => (${element.getAttribute(attribName)}))`);
     element.removeAttribute(attribName);
   }
 

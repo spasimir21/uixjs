@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "text.html.uix.slot",
+  "injectionSelector": "L:text.html -meta -comment",
+  "patterns": [
+    {
+      "include": "#slot-open"
+    },
+    {
+      "include": "#slot-close"
+    }
+  ],
+  "repository": {
+    "slot-open": {
+      "begin": "(<)(slot)",
+      "end": "/?>",
+      "beginCaptures": {
+        "1": { "name": "punctuation" },
+        "2": { "name": "keyword.control" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation" }
+      },
+      "contentName": "meta.tag.structure.slot.start.html"
+    },
+    "slot-close": {
+      "match": "(</)\\s*(slot)\\s*(>)",
+      "captures": {
+        "1": { "name": "punctuation" },
+        "2": { "name": "keyword.control" },
+        "3": { "name": "punctuation" }
+      }
+    }
+  }
+}

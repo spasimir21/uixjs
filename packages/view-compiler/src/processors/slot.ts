@@ -14,7 +14,7 @@ function processSlot(element: Node, view: ViewData, viewModule: ViewModuleData) 
 
   const slotNameCode = element.getAttribute(':name') ?? `'${element.getAttribute('name')}'`;
 
-  view.instructions.push(`u.slot(${elementViewSelector}, $, (${slotNameCode}), ${defaultViewCode})`);
+  view.instructions.push(`u.slot(${elementViewSelector}, e, $, () => (${slotNameCode}), ${defaultViewCode})`);
 
   element.tagName = 'PLCH';
   element.removeAttribute(':name');

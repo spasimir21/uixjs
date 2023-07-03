@@ -11,9 +11,7 @@ function processSlotContent(element: Node, view: ViewData, viewModule: ViewModul
 
   const slotNameCode = element.getAttribute(':slot') ?? `'${element.getAttribute('slot')}'`;
 
-  view.instructions.push(
-    `u.slotContent($['${ComponentIdStack.peek()}'], $, (${slotNameCode}), ${contentView.name}View)`
-  );
+  view.instructions.push(`u.slotContent(e, '${ComponentIdStack.peek()}', $, () => (${slotNameCode}), ${contentView.name}View)`);
 
   element.remove();
 

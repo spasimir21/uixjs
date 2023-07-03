@@ -11,15 +11,15 @@ function State(target: any, prop: string | number | symbol) {
   addDecoration(target, prop, DecorationType.State);
 }
 
-function EffectDecorator(target: any, prop: string | number | symbol, dependencies?: (object: any) => void) {
+function EffectDecorator(target: any, prop: string | number | symbol, dependencies?: (object: any) => any) {
   const callback =
     dependencies == null
       ? target[prop]
       : function (this: any) {
-          dependencies(this);
+          const deps = dependencies(this);
 
           TrackStack.push();
-          target[prop].call(this);
+          target[prop].call(this, deps);
           TrackStack.pop();
         };
 
@@ -32,27 +32,26 @@ function EffectDecorator(target: any, prop: string | number | symbol, dependenci
   addDecoration(target, prop, DecorationType.Effect, callback);
 }
 
-function Effect<T>(dependencies: (target: T) => void): (target: any, prop: string | number | symbol) => void;
+function Effect<T>(dependencies: (target: T) => any): (target: any, prop: string | number | symbol) => void;
 function Effect(target: any, prop: string | number | symbol): void;
 function Effect(targetOrDependencies: any, prop?: string | number | symbol) {
-  if (prop == null)
-    return (target: any, prop: string | number | symbol) => EffectDecorator(target, prop, targetOrDependencies);
+  if (prop == null) return (target: any, prop: string | number | symbol) => EffectDecorator(target, prop, targetOrDependencies);
 
   EffectDecorator(targetOrDependencies, prop);
 }
 
-function ComputedDecorator(target: any, prop: string | number | symbol, dependencies?: (target: any) => void) {
+function ComputedDecorator(target: any, prop: string | number | symbol, dependencies?: (target: any) => any) {
   const descriptor = Object.getOwnPropertyDescriptor(target, prop);
 
-  const originalGetter = descriptor?.get ?? (() => null);
+  const originalGetter = (descriptor?.get ?? (() => null)) as any;
   const getter =
     dependencies == null
       ? originalGetter
       : function (this: any) {
-          dependencies(this);
+          const deps = dependencies(this);
 
           TrackStack.push();
-          const result = originalGetter.call(this);
+          const result = originalGetter.call(this, deps);
           TrackStack.pop();
 
           return result;
@@ -77,11 +76,10 @@ function ComputedDecorator(target: any, prop: string | number | symbol, dependen
   addDecoration(target, prop, DecorationType.Computed, data);
 }
 
-function Computed<T>(dependencies: (target: T) => void): (target: any, prop: string | number | symbol) => void;
+function Computed<T>(dependencies: (target: T) => any): (target: any, prop: string | number | symbol) => void;
 function Computed(target: any, prop: string | number | symbol): void;
 function Computed(targetOrDependencies: any, prop?: string | number | symbol) {
-  if (prop == null)
-    return (target: any, prop: string | number | symbol) => ComputedDecorator(target, prop, targetOrDependencies);
+  if (prop == null) return (target: any, prop: string | number | symbol) => ComputedDecorator(target, prop, targetOrDependencies);
 
   ComputedDecorator(targetOrDependencies, prop);
 }

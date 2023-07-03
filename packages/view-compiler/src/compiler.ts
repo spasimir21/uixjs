@@ -10,7 +10,6 @@ function compile(source: string, resolveStylesheet?: StylesheetResolver) {
   const viewModule = createViewModule();
 
   const rootView = createView('root', html);
-  rootView.instructions.push(`u.booleanAttribute($.component, '${viewModule.styleScopeId}', () => true)`);
   viewModule.views.push(rootView);
 
   processElement(html, rootView, viewModule);

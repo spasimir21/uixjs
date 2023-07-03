@@ -1,0 +1,41 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "text.html.uix.if-attributes",
+  "injectionSelector": "L:meta.tag.structure.if.start.html",
+  "patterns": [
+    {
+      "include": "#condition-attribute"
+    },
+    {
+      "include": "#keepalive-attribute"
+    }
+  ],
+  "repository": {
+    "condition-attribute": {
+      "begin": "(_)\\s*(=)\\s*('|\")",
+      "end": "(\\3)",
+      "beginCaptures": {
+        "1": { "name": "keyword.control" },
+        "2": { "name": "punctuation" },
+        "3": { "name": "punctuation" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation" }
+      },
+      "patterns": [{ "include": "source.js" }]
+    },
+    "keepalive-attribute": {
+      "begin": "(keepalive)\\s*(=)\\s*('|\")",
+      "end": "(\\3)",
+      "beginCaptures": {
+        "1": { "name": "entity.other.attribute-name" },
+        "2": { "name": "punctuation" },
+        "3": { "name": "punctuation" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation" }
+      },
+      "patterns": [{ "include": "source.js" }]
+    }
+  }
+}

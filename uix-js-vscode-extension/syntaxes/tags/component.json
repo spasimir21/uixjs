@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "text.html.uix.component",
+  "injectionSelector": "L:text.html -meta -comment",
+  "patterns": [
+    {
+      "include": "#component-tag"
+    }
+  ],
+  "repository": {
+    "component-tag": {
+      "begin": "(<)(component)",
+      "end": "/>",
+      "beginCaptures": {
+        "1": { "name": "punctuation" },
+        "2": { "name": "keyword.control" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation" }
+      },
+      "contentName": "meta.tag.structure.component.start.html"
+    }
+  }
+}

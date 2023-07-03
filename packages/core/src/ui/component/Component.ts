@@ -99,6 +99,8 @@ class UixComponent extends HTMLElement {
     if (!this.isConnected || this.isRendered || !this.isInitialized || this.isKilled) return;
     this.append(...this.view.rootElement.childNodes);
 
+    this.setAttribute(this.view.view.styleScopeId ?? 'uix', '');
+
     for (const stylesheet of this.componentInfo.stylesheets) this.registry.styles.load(stylesheet.id);
 
     this.isRendered = true;
@@ -119,7 +121,6 @@ class UixComponent extends HTMLElement {
     this.innerHTML = '';
 
     this.isKilled = true;
-    this.remove();
   }
 
   connectedCallback() {

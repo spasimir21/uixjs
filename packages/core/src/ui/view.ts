@@ -1,4 +1,5 @@
 import { Fragment } from './fragment/Fragment';
+import { context } from '../context';
 import { scope } from '../scope';
 
 type ViewData<T> = T & { styleScopeId: string; view: View<T> };
@@ -17,7 +18,7 @@ interface View<T> {
   styleScopeId: string | null;
   template: HTMLTemplateElement;
   instructionsFunction: ViewInstructionsFunction<T>;
-  instantiate: (data: T) => ViewInstance<T>;
+  instantiate: (data: T, parentEls?: Record<string, HTMLElement>) => ViewInstance<T>;
 }
 
 function addStyleScopeIdToElement(element: HTMLElement, styleScopeId: string) {
@@ -55,21 +56,23 @@ function view<T>(
     styleScopeId,
     template,
     instructionsFunction,
-    instantiate: data => instantiateView(view, data)
+    instantiate: (data, parentEls) => instantiateView(view, data, parentEls)
   };
 
   return view;
 }
 
-function instantiateView<T>(view: View<T>, data: T): ViewInstance<T> {
+function instantiateView<T>(view: View<T>, data: T, parentEls?: Record<string, HTMLElement>): ViewInstance<T> {
   const rootElement = view.template.content.cloneNode(true).firstChild as HTMLDivElement;
 
   const elementsAsArray = rootElement.querySelectorAll('[\\$]');
-  const elements = {} as Record<string, HTMLElement>;
+  let elements = {} as Record<string, HTMLElement>;
   for (const element of elementsAsArray) {
     elements[element.getAttribute('$') as string] = element as HTMLElement;
     element.removeAttribute('$');
   }
+
+  elements = parentEls == null ? elements : context(elements, parentEls);
 
   const cleanupFunctions = view.instructionsFunction(elements, scope({ styleScopeId: view.styleScopeId, view }, data));
   const cleanup = () => {

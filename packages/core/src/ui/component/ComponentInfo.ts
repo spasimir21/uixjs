@@ -29,4 +29,4 @@ function defineComponent(info: IncompleteComponentInfo): ComponentInfo {
   return info as ComponentInfo;
 }
 
-export { ComponentInfo, DeferredComponentInfo, defineComponent };
+export { ComponentInfo, DeferredComponentInfo, IncompleteComponentInfo, defineComponent };

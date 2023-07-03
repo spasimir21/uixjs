@@ -2,7 +2,7 @@
   "name": "uix-js-vscode-extension",
   "displayName": "Uix.js Support",
   "description": "",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "main": "./index.js",
   "icon": "./icon.png",
   "engines": {
@@ -48,36 +48,106 @@
     },
     "grammars": [
       {
-        "scopeName": "uix.injection.interpolation",
+        "scopeName": "text.html.uix.interpolation",
         "path": "./syntaxes/interpolation.json",
         "injectTo": [
           "text.html"
         ]
       },
       {
-        "scopeName": "uix.injection.insert-tag",
-        "path": "./syntaxes/insert-tag.json",
+        "scopeName": "text.html.uix.component",
+        "path": "./syntaxes/tags/component.json",
         "injectTo": [
           "text.html"
         ]
       },
       {
-        "scopeName": "uix.injection.special-tags",
-        "path": "./syntaxes/special-tags.json",
+        "scopeName": "text.html.uix.content",
+        "path": "./syntaxes/tags/content.json",
         "injectTo": [
           "text.html"
         ]
       },
       {
-        "scopeName": "uix.injection.each-attributes",
-        "path": "./syntaxes/each-attributes.json",
+        "scopeName": "text.html.uix.each",
+        "path": "./syntaxes/tags/each.json",
         "injectTo": [
           "text.html"
         ]
       },
       {
-        "scopeName": "uix.injection.attribute-bindings",
-        "path": "./syntaxes/attribute-bindings.json",
+        "scopeName": "text.html.uix.else-if",
+        "path": "./syntaxes/tags/else-if.json",
+        "injectTo": [
+          "text.html"
+        ]
+      },
+      {
+        "scopeName": "text.html.uix.else",
+        "path": "./syntaxes/tags/else.json",
+        "injectTo": [
+          "text.html"
+        ]
+      },
+      {
+        "scopeName": "text.html.uix.if",
+        "path": "./syntaxes/tags/if.json",
+        "injectTo": [
+          "text.html"
+        ]
+      },
+      {
+        "scopeName": "text.html.uix.insert",
+        "path": "./syntaxes/tags/insert.json",
+        "injectTo": [
+          "text.html"
+        ]
+      },
+      {
+        "scopeName": "text.html.uix.slot",
+        "path": "./syntaxes/tags/slot.json",
+        "injectTo": [
+          "text.html"
+        ]
+      },
+      {
+        "scopeName": "text.html.uix.view",
+        "path": "./syntaxes/tags/view.json",
+        "injectTo": [
+          "text.html"
+        ]
+      },
+      {
+        "scopeName": "text.html.uix.if-attributes",
+        "path": "./syntaxes/attributes/if-attributes.json",
+        "injectTo": [
+          "text.html"
+        ]
+      },
+      {
+        "scopeName": "text.html.uix.else-if-attributes",
+        "path": "./syntaxes/attributes/else-if-attributes.json",
+        "injectTo": [
+          "text.html"
+        ]
+      },
+      {
+        "scopeName": "text.html.uix.each-attributes",
+        "path": "./syntaxes/attributes/each-attributes.json",
+        "injectTo": [
+          "text.html"
+        ]
+      },
+      {
+        "scopeName": "text.html.uix.view-attributes",
+        "path": "./syntaxes/attributes/view-attributes.json",
+        "injectTo": [
+          "text.html"
+        ]
+      },
+      {
+        "scopeName": "text.html.uix.attributes",
+        "path": "./syntaxes/attributes/attributes.json",
         "injectTo": [
           "text.html"
         ]

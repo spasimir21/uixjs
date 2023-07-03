@@ -1,0 +1,83 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "text.html.uix.attributes",
+  "injectionSelector": "L:meta.tag",
+  "patterns": [
+    {
+      "include": "#attribute-bindings"
+    },
+    {
+      "include": "#ref-attribute"
+    },
+    {
+      "include": "#attribute"
+    },
+    {
+      "include": "#boolean-modifier-attribute"
+    },
+    {
+      "include": "#ignore-attribute"
+    },
+    {
+      "include": "#not-component-attribute"
+    }
+  ],
+  "repository": {
+    "attribute-bindings": {
+      "begin": "((attr|bool-attr|prop|shared|export|direct)?:|@|\\.|#|\\*)([a-zA-Z0-9\\-\\:\\#\\!]+?)\\s*(=)\\s*('|\")",
+      "end": "(\\5)",
+      "beginCaptures": {
+        "1": { "name": "punctuation" },
+        "3": { "name": "entity.other.attribute-name" },
+        "4": { "name": "punctuation" },
+        "5": { "name": "punctuation" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation" }
+      },
+      "patterns": [{ "include": "source.js" }]
+    },
+    "ref-attribute": {
+      "begin": "(ref)\\s*(=)\\s*('|\")",
+      "end": "(\\3)",
+      "beginCaptures": {
+        "1": { "name": "entity.other.attribute-name" },
+        "2": { "name": "punctuation" },
+        "3": { "name": "punctuation" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation" }
+      },
+      "patterns": [{ "include": "source.js" }]
+    },
+    "attribute": {
+      "begin": "([a-zA-Z0-9\\-\\:\\#]+?)\\s*(=)\\s*('|\")",
+      "end": "(\\3)",
+      "beginCaptures": {
+        "1": { "name": "entity.other.attribute-name" },
+        "2": { "name": "punctuation" },
+        "3": { "name": "punctuation" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation" }
+      },
+      "contentName": "string",
+      "name": "attribute"
+    },
+    "boolean-modifier-attribute": {
+      "match": "(\\*)([a-zA-Z0-9\\-\\:\\#\\!]+)",
+      "captures": {
+        "1": { "name": "punctuation" },
+        "2": { "name": "entity.other.attribute-name" }
+      }
+    },
+    "ignore-attribute": {
+      "match": "(?<=\\s)\\$i(?=\\s+|\\s*/?>)",
+      "name": "punctuation"
+    },
+    "not-component-attribute": {
+      "match": "(?<=\\s)\\$nc(?=\\s+|\\s*/?>)",
+      "name": "punctuation"
+    }
+  }
+}

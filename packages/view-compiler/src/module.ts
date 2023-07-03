@@ -16,7 +16,10 @@ function createViewModule(): ViewModuleData {
 
 async function compileViewModule(viewModule: ViewModuleData, resolveStylesheet?: StylesheetResolver) {
   // prettier-ignore
-  const dataCode = `{ view: rootView, stylesheets: [${viewModule.stylesheets.map(s => s.id + 'Stylesheet').join(',')}] }`;
+  const stylesheetsCode = `[${viewModule.stylesheets.map(s => s.id + 'Stylesheet').join(',')}]`;
+
+  const compiledViews: string[] = [];
+  for (const view of viewModule.views) compiledViews.push(await compileView(view, viewModule.styleScopeId));
 
   const compiledStylesheets: string[] = [];
   for (const stylesheet of viewModule.stylesheets)
@@ -25,12 +28,12 @@ async function compileViewModule(viewModule: ViewModuleData, resolveStylesheet?:
   // prettier-ignore
   let code = "import { range } from '@uixjs/core';\nimport * as u from '@uixjs/core';\n" +
           viewModule.inserts.join('\n') + '\n' +
-          viewModule.views.map(view => compileView(view, viewModule.styleScopeId)).join('\n') + '\n' +
+          compiledViews.join('\n') + '\n' +
           compiledStylesheets.join('\n') + '\n' +
-          `const data = ${dataCode};\n` +
-          'const defineComponent = info => u.defineComponent({ ...info, ...data });\n' +
+          `const stylesheets = ${stylesheetsCode};` +
+          'const defineComponent = info => u.defineComponent({ ...info, view: rootView, stylesheets: stylesheets.concat(info.stylesheets ?? []) });\n' +
           'export default defineComponent;\n' +
-          'export { defineComponent };\n';
+          'export { defineComponent, stylesheets, rootView as view };\n';
 
   // code += `console.log(\`${cancelTemplateString(code)}\`)`;
 

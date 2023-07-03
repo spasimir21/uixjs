@@ -59,16 +59,16 @@ class ComputedNode<T> extends DuplexNode {
   }
 }
 
-function computed<T>(dependencies: () => void, getter: () => T): ComputedNode<T>;
+function computed<T, TDeps>(dependencies: () => TDeps, getter: (deps: TDeps) => T): ComputedNode<T>;
 function computed<T>(getter: () => T): ComputedNode<T>;
-function computed<T>(getterOrDependencies: (() => void) | (() => T), getter?: () => T) {
-  if (getter == null) return new ComputedNode(getterOrDependencies);
+function computed<T, TDeps>(getterOrDependencies: (() => TDeps) | (() => T), getter?: (deps?: TDeps) => T) {
+  if (getter == null) return new ComputedNode(getterOrDependencies as any);
 
   return new ComputedNode(() => {
-    getterOrDependencies();
+    const depsResult = getterOrDependencies();
 
     TrackStack.push();
-    const result = getter();
+    const result = getter(depsResult as any);
     TrackStack.pop();
 
     return result;

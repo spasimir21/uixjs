@@ -15,9 +15,7 @@ function processInputs(element: Node, view: ViewData) {
     const inputName = attribName.slice(1, delayed ? undefined : -1);
     const code = element.getAttribute(attribName);
 
-    view.instructions.push(
-      `u.bindInput(${viewSelector}, '${inputName}', ${delayed}, () => (${code}), v => (${code} = v))`
-    );
+    view.instructions.push(`u.bindInput(${viewSelector}, '${inputName}', ${delayed}, () => (${code}), v => (${code} = v))`);
 
     element.removeAttribute(attribName);
   }

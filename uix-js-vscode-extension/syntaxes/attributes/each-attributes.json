@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-  "scopeName": "uix.injection.each-attributes",
+  "scopeName": "text.html.uix.each-attributes",
   "injectionSelector": "L:meta.tag.structure.each.start.html",
   "patterns": [
     {
@@ -23,8 +23,7 @@
       "endCaptures": {
         "1": { "name": "punctuation" }
       },
-      "patterns": [{ "include": "source.js" }],
-      "name": "condition-attribute"
+      "patterns": [{ "include": "source.js" }]
     },
     "key-attribute": {
       "begin": "(key)\\s*(=)\\s*('|\")",
@@ -37,8 +36,7 @@
       "endCaptures": {
         "1": { "name": "punctuation" }
       },
-      "patterns": [{ "include": "source.js" }],
-      "name": "key-attribute"
+      "patterns": [{ "include": "source.js" }]
     }
   }
 }

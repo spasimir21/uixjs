@@ -30,6 +30,8 @@ function processIf(element: Node, view: ViewData, viewModule: ViewModuleData) {
     elementChain.push(nextElement);
   }
 
+  const keepaliveCode = elementChain[0].getAttribute('keepalive') ?? 'true';
+
   const viewsAndConditions = processElementChain(elementChain, viewModule);
 
   const lastViewAndCondition = viewsAndConditions[viewsAndConditions.length - 1];
@@ -41,14 +43,12 @@ function processIf(element: Node, view: ViewData, viewModule: ViewModuleData) {
   if (viewsAndConditions.length === 1) {
     const [condition, ifView] = viewsAndConditions[0];
     view.instructions.push(
-      `u._if(${elementViewSelector}, $, () => (${condition}), ${ifView.name}View, ${elseViewCode})`
+      `u._if(${elementViewSelector}, e, $, () => (${condition}), ${ifView.name}View, ${elseViewCode}, ${keepaliveCode})`
     );
   } else {
-    const viewsAndConditionsCode = viewsAndConditions.map(
-      ([condition, view]) => `[() => (${condition}), ${view.name}View]`
-    );
+    const viewsAndConditionsCode = viewsAndConditions.map(([condition, view]) => `[() => (${condition}), ${view.name}View]`);
     view.instructions.push(
-      `u._condition(${elementViewSelector}, $, [${viewsAndConditionsCode.join(',')}], ${elseViewCode})`
+      `u._condition(${elementViewSelector}, e, $, [${viewsAndConditionsCode.join(',')}], ${elseViewCode}, ${keepaliveCode})`
     );
   }
 
@@ -59,6 +59,7 @@ function processIf(element: Node, view: ViewData, viewModule: ViewModuleData) {
 
   element.tagName = 'PLCH';
   element.removeAttribute('_');
+  element.removeAttribute('keepalive');
 
   return true;
 }

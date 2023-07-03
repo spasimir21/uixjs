@@ -12,17 +12,25 @@ const TOKEN_SCOPES = [
 const TOKEN_COLOR = '#FFCB6B';
 
 const SHIMS = `declare module '*.view.html' {
-  import { ComponentInfo } from '@uixjs/core';
+  import { IncompleteComponentInfo, View, StylesheetInfo } from '@uixjs/core';
 
-  export interface IncompleteComponentInfo {
-    name: string;
-    controller: any;
-    dependencies?: ComponentInfo['dependencies'];
-  }
+  type IncompleteComponentInfoWithoutView = Omit<IncompleteComponentInfo, 'view'>;
 
-  const defineComponent: (info: IncompleteComponentInfo) => ComponentInfo;
+  const defineComponent: (info: IncompleteComponentInfoWithoutView) => ComponentInfo;
+  const stylesheets: StylesheetInfo[];
+  const view: View<any>;
+
   export default defineComponent;
-  export { defineComponent, ComponentInfo };
+  export {
+    defineComponent,
+    view,
+    stylesheets,
+    ComponentInfo,
+    View,
+    StylesheetInfo,
+    IncompleteComponentInfo,
+    IncompleteComponentInfoWithoutView
+  };
 }
 `;
 
@@ -80,9 +88,7 @@ function activate(context) {
 
       const configPath = path.join(projectPath, '.parcelrc');
       const configExist = fs.existsSync(configPath);
-      const config = configExist
-        ? JSON.parse(fs.readFileSync(configPath).toString())
-        : { extends: '@parcel/config-default' };
+      const config = configExist ? JSON.parse(fs.readFileSync(configPath).toString()) : { extends: '@parcel/config-default' };
 
       if (!('transformers' in config)) config['transformers'] = {};
 
@@ -108,8 +114,7 @@ function activate(context) {
         prompt: 'Does the component have a style (y/n)'
       });
 
-      const hasStyle =
-        hasStyleInput.trim() === 'y' || hasStyleInput.trim() === 'yes' || hasStyleInput.trim() === 'true';
+      const hasStyle = hasStyleInput.trim() === 'y' || hasStyleInput.trim() === 'yes' || hasStyleInput.trim() === 'true';
 
       addComponent(projectPath, componentName, hasStyle);
     })

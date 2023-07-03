@@ -11,9 +11,7 @@ function processClasses(element: Node, view: ViewData) {
   const viewSelector = getElementViewSelector(element);
 
   for (const attribName of attribsToBeProcessed) {
-    view.instructions.push(
-      `u._class(${viewSelector}, '${attribName.slice(1)}', () => (${element.getAttribute(attribName)}))`
-    );
+    view.instructions.push(`u._class(${viewSelector}, '${attribName.slice(1)}', () => (${element.getAttribute(attribName)}))`);
     element.removeAttribute(attribName);
   }
 

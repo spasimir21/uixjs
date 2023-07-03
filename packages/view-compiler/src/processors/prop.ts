@@ -5,9 +5,7 @@ import { ViewData } from '../view';
 function processProps(element: Node, view: ViewData) {
   if (!(element instanceof HTMLElement)) return false;
 
-  const attribsToBeProcessed = Object.keys(element.attributes).filter(
-    attrib => attrib.startsWith('p:') || attrib.startsWith('prop:')
-  );
+  const attribsToBeProcessed = Object.keys(element.attributes).filter(attrib => attrib.startsWith('prop:'));
 
   if (attribsToBeProcessed.length === 0) return false;
 

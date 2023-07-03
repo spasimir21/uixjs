@@ -28,8 +28,7 @@ function processEvents(element: Node, view: ViewData) {
     if (stopPropagation) eventFunctions.push('stopPropagation');
     if (preventDefault) eventFunctions.push('preventDefault');
 
-    const callbackCode =
-      eventFunctions.length > 0 ? `{${eventFunctions.map(f => `e.${f}()`).join(';')};${code}}` : `(${code})`;
+    const callbackCode = eventFunctions.length > 0 ? `{${eventFunctions.map(f => `e.${f}()`).join(';')};${code}}` : `(${code})`;
 
     const optionsCode = once ? '{ once: true }' : '';
 

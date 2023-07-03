@@ -5,9 +5,7 @@ import { ViewData } from '../view';
 function processShared(element: Node, view: ViewData) {
   if (!(element instanceof HTMLElement)) return false;
 
-  const attribsToBeProcessed = Object.keys(element.attributes).filter(
-    attrib => attrib.startsWith('s:') || attrib.startsWith('shared:')
-  );
+  const attribsToBeProcessed = Object.keys(element.attributes).filter(attrib => attrib.startsWith('shared:'));
 
   if (attribsToBeProcessed.length === 0) return false;
 

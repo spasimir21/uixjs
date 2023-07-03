@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "text.html.uix.if",
+  "injectionSelector": "L:text.html -meta -comment",
+  "patterns": [
+    {
+      "include": "#if-open"
+    },
+    {
+      "include": "#if-close"
+    }
+  ],
+  "repository": {
+    "if-open": {
+      "begin": "(<)(if)",
+      "end": ">",
+      "beginCaptures": {
+        "1": { "name": "punctuation" },
+        "2": { "name": "keyword.control" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation" }
+      },
+      "contentName": "meta.tag.structure.if.start.html"
+    },
+    "if-close": {
+      "match": "(</)\\s*(if)\\s*(>)",
+      "captures": {
+        "1": { "name": "punctuation" },
+        "2": { "name": "keyword.control" },
+        "3": { "name": "punctuation" }
+      }
+    }
+  }
+}

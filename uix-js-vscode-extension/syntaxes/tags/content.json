@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "text.html.uix.content",
+  "injectionSelector": "L:text.html -meta -comment",
+  "patterns": [
+    {
+      "include": "#content-open"
+    },
+    {
+      "include": "#content-close"
+    }
+  ],
+  "repository": {
+    "content-open": {
+      "begin": "(<)(content)",
+      "end": ">",
+      "beginCaptures": {
+        "1": { "name": "punctuation" },
+        "2": { "name": "keyword.control" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation" }
+      },
+      "contentName": "meta.tag.structure.content.start.html"
+    },
+    "content-close": {
+      "match": "(</)\\s*(content)\\s*(>)",
+      "captures": {
+        "1": { "name": "punctuation" },
+        "2": { "name": "keyword.control" },
+        "3": { "name": "punctuation" }
+      }
+    }
+  }
+}

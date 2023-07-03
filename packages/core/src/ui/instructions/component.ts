@@ -22,8 +22,6 @@ function component(
   elements[placeholderId].replaceWith(newComponent);
   elements[placeholderId] = newComponent;
 
-  data[placeholderId] = newComponent;
-
   return newComponent.kill.bind(newComponent);
 }
 

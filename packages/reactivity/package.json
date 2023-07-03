@@ -1,6 +1,6 @@
 {
   "name": "@uixjs/reactivity",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "The reactive programming package used in Uix.js",
   "main": "./dist/index.js",
   "scripts": {

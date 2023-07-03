@@ -7,6 +7,7 @@ type Key = string | number;
 
 function _forEachKeyed(
   placeholder: HTMLElement,
+  parentEls: Record<string, HTMLElement>,
   data: any,
   iteratorKey: string,
   getValues: () => any[],
@@ -18,7 +19,7 @@ function _forEachKeyed(
   const viewElements: Record<Key, ChildNode> = {};
   let keys: Key[] = [];
 
-  const emptyViewInstance = emptyView ? emptyView.instantiate(data) : null;
+  const emptyViewInstance = emptyView ? emptyView.instantiate(data, parentEls) : null;
   const fragment = new Fragment([]);
 
   const emptyViewElement = emptyViewInstance ? viewToElement(emptyViewInstance) : document.createComment('');
@@ -41,7 +42,8 @@ function _forEachKeyed(
       if (key in viewInstances) continue;
 
       const viewInstance = entryView.instantiate(
-        scope(reactive({ [iteratorKey]: array[i], [iteratorKey + 'Key']: key }), data)
+        scope(reactive({ [iteratorKey]: array[i], [iteratorKey + 'Key']: key }), data),
+        parentEls
       );
 
       viewInstances[key] = viewInstance;

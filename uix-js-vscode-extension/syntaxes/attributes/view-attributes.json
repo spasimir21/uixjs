@@ -1,0 +1,41 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "text.html.uix.view-attributes",
+  "injectionSelector": "L:meta.tag.structure.view.start.html",
+  "patterns": [
+    {
+      "include": "#view-attribute"
+    },
+    {
+      "include": "#data-attribute"
+    }
+  ],
+  "repository": {
+    "view-attribute": {
+      "begin": "(view)\\s*(=)\\s*('|\")",
+      "end": "(\\3)",
+      "beginCaptures": {
+        "1": { "name": "entity.other.attribute-name" },
+        "2": { "name": "punctuation" },
+        "3": { "name": "punctuation" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation" }
+      },
+      "patterns": [{ "include": "source.js" }]
+    },
+    "data-attribute": {
+      "begin": "(data)\\s*(=)\\s*('|\")",
+      "end": "(\\3)",
+      "beginCaptures": {
+        "1": { "name": "entity.other.attribute-name" },
+        "2": { "name": "punctuation" },
+        "3": { "name": "punctuation" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation" }
+      },
+      "patterns": [{ "include": "source.js" }]
+    }
+  }
+}

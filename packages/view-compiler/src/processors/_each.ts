@@ -26,12 +26,12 @@ function processEach(element: Node, view: ViewData, viewModule: ViewModuleData) 
   if (key) {
     // prettier-ignore
     view.instructions.push(
-      `u._forEachKeyed(${elementViewSelector}, $, '${iteratorKey}', () => (${eachCondition}), ${iteratorKey} => (${key}), ${eachView.name}View, ${elseViewCode})`
+      `u._forEachKeyed(${elementViewSelector}, e, $, '${iteratorKey}', () => (${eachCondition}), ${iteratorKey} => (${key}), ${eachView.name}View, ${elseViewCode})`
     );
   } else {
     // prettier-ignore
     view.instructions.push(
-      `u._forEach(${elementViewSelector}, $, '${iteratorKey}', () => (${eachCondition}), ${eachView.name}View, ${elseViewCode})`
+      `u._forEach(${elementViewSelector}, e, $, '${iteratorKey}', () => (${eachCondition}), ${eachView.name}View, ${elseViewCode})`
     );
   }
 

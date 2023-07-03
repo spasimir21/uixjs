@@ -46,17 +46,21 @@ class EffectNode extends SubscriberNode {
   }
 }
 
-function effect(dependencies: () => void, callback: () => void, autorun?: boolean): EffectNode;
+function effect<T>(dependencies: () => T, callback: (deps: T) => void, autorun?: boolean): EffectNode;
 function effect(callback: () => void, autorun?: boolean): EffectNode;
-function effect(callbackOrDependencies: () => void, callbackOrAutorun?: boolean | (() => void), autorun?: boolean) {
+function effect<T>(
+  callbackOrDependencies: () => T | void,
+  callbackOrAutorun?: boolean | ((deps?: T) => void),
+  autorun?: boolean
+) {
   if (callbackOrAutorun == null || typeof callbackOrAutorun == 'boolean')
     return new EffectNode(callbackOrDependencies, callbackOrAutorun);
 
   return new EffectNode(() => {
-    callbackOrDependencies();
+    const deps = callbackOrDependencies();
 
     TrackStack.push();
-    callbackOrAutorun();
+    callbackOrAutorun(deps as any);
     TrackStack.pop();
   }, autorun);
 }

@@ -5,13 +5,14 @@ import { scope } from '../../scope';
 
 function _forEach(
   placeholder: HTMLElement,
+  parentEls: Record<string, HTMLElement>,
   data: any,
   iteratorKey: string,
   getValues: () => any[],
   entryView: View<any>,
   emptyView: View<any> | null
 ) {
-  const emptyViewInstance = emptyView ? emptyView.instantiate(data) : null;
+  const emptyViewInstance = emptyView ? emptyView.instantiate(data, parentEls) : null;
   const viewInstances: ViewInstance<any>[] = [];
   const fragment = new Fragment([]);
 
@@ -29,7 +30,8 @@ function _forEach(
     if (lengthDelta > 0) {
       for (let i = viewInstances.length; i < array.length; i++) {
         const viewInstance = entryView.instantiate(
-          scope(reactive({ [iteratorKey]: array[i], [iteratorKey + 'Index']: i }), data)
+          scope(reactive({ [iteratorKey]: array[i], [iteratorKey + 'Index']: i }), data),
+          parentEls
         );
 
         fragment.appendChild(viewToElement(viewInstance));

@@ -12,6 +12,7 @@ export * from './ui/instructions/styleProperty';
 export * from './ui/instructions/textContent';
 export * from './ui/instructions/slotContent';
 export * from './ui/instructions/bindDirect';
+export * from './ui/instructions/childView';
 export * from './ui/instructions/attribute';
 export * from './ui/instructions/bindInput';
 export * from './ui/instructions/condition';

@@ -3,6 +3,7 @@ import { processBooleanAttributes } from './booleanAttribute';
 import { processComponentTag } from './componentTag';
 import { processSlotContent } from './slotContent';
 import { processStyleProps } from './styleProp';
+import { processChildViews } from './childView';
 import { processModifiers } from './modifiers';
 import { processComments } from './comment';
 import { Node } from '../node-html-parser';
@@ -38,6 +39,7 @@ const PROCESSORS: Processor[] = [
   processEach,
   processSlot,
   processSlotContent,
+  processChildViews,
   processComponent,
   processAttributes,
   processBooleanAttributes,
