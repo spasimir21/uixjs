@@ -16,7 +16,7 @@ interface ArrayAndNodes {
 
 function _push(this: ArrayAndNodes, ...items: any[]) {
   if (items.length !== 0) this.nodes.$length.emitChange();
-  return this.array.push(...items);
+  return this.array.push(...items.map(reactive));
 }
 
 function _pop(this: ArrayAndNodes) {
@@ -26,7 +26,7 @@ function _pop(this: ArrayAndNodes) {
 
 function _unshift(this: ArrayAndNodes, ...items: any[]) {
   if (items.length !== 0) this.nodes.$length.emitChange();
-  return this.array.unshift(...items);
+  return this.array.unshift(...items.map(reactive));
 }
 
 function _shift(this: ArrayAndNodes) {
@@ -36,7 +36,7 @@ function _shift(this: ArrayAndNodes) {
 
 function _splice(this: ArrayAndNodes, start: number, deleteCount: number, ...items: any[]) {
   if (deleteCount != items.length) this.nodes.$length.emitChange();
-  return this.array.splice(start, deleteCount, ...items);
+  return this.array.splice(start, deleteCount, ...items.map(reactive));
 }
 
 function makeArrayReactive(array: any[]): any {

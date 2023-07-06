@@ -1,6 +1,6 @@
 {
   "name": "@uixjs/core",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A web UI library designed for reactive programming",
   "main": "./dist/index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "/dist"
   ],
   "dependencies": {
-    "@uixjs/reactivity": "^0.0.5"
+    "@uixjs/reactivity": "^0.0.6"
   },
   "devDependencies": {
     "typescript": "^5.1.3"

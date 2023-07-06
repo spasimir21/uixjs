@@ -1,3 +1,4 @@
+import { registerDependency } from '../dependencies';
 import { ComputedNode } from '../nodes/ComputedNode';
 import { EffectNode } from '../nodes/EffectNode';
 import { StateNode } from '../nodes/StateNode';
@@ -5,14 +6,20 @@ import { StateNode } from '../nodes/StateNode';
 enum DecorationType {
   State,
   Computed,
-  Effect
+  Effect,
+  Dependency
 }
 
 type Decoration = { type: DecorationType; data: any };
 
 type Decorations = Record<string | number | symbol, Decoration>;
 
-const DECORATION_APPLICATION_ORDER = [DecorationType.State, DecorationType.Computed, DecorationType.Effect];
+const DECORATION_APPLICATION_ORDER = [
+  DecorationType.State,
+  DecorationType.Computed,
+  DecorationType.Dependency,
+  DecorationType.Effect
+];
 
 const $DECORATIONS = Symbol('$DECORATIONS');
 const $NODES = Symbol('$NODES');
@@ -62,6 +69,11 @@ function applyComputedDecoration(target: any, prop: string | number | symbol, da
   return node;
 }
 
+function applyDependencyDecoration(target: any, prop: string | number | symbol, initializer?: (target: any) => any) {
+  const value = initializer ? initializer(target) : target[prop];
+  target[prop] = registerDependency(target, value);
+}
+
 function applyDecoration(target: any, prop: string | number | symbol, decoration: Decoration) {
   if (target[$NODES] == null) target[$NODES] = {};
   if (target[$NODES][prop] != null) return;
@@ -70,19 +82,24 @@ function applyDecoration(target: any, prop: string | number | symbol, decoration
   const applicationFunction =
       decoration.type === DecorationType.State ? applyStateDecoration
     : decoration.type === DecorationType.Computed ? applyComputedDecoration
+    : decoration.type === DecorationType.Dependency ? applyDependencyDecoration
     : applyEffectDecoration;
 
   const node = applicationFunction(target, prop, decoration.data);
 
-  target[$NODES][prop] = node;
+  if (node) target[$NODES][prop] = node;
 
   return node;
 }
 
-function applyDecorations(target: any, decorations?: Decorations) {
+function applyDecorations(
+  target: any,
+  types: DecorationType[] = DECORATION_APPLICATION_ORDER,
+  decorations?: Decorations
+) {
   if (decorations == null) decorations = (target[$DECORATIONS] ?? {}) as Decorations;
 
-  for (const decorationType of DECORATION_APPLICATION_ORDER) {
+  for (const decorationType of types) {
     for (const prop in decorations) {
       const decoration = decorations[prop];
       if (decoration.type !== decorationType) continue;

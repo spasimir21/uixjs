@@ -35,6 +35,7 @@ export * from './ui/style/Stylesheet';
 export * from './ui/view';
 
 export * from './Controller';
+export * from './decorators';
 export * from './reference';
 export * from './Registry';
 export * from './context';

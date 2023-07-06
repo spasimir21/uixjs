@@ -1,3 +1,5 @@
+import { applyControllerDecorations, applyProvideDecorations } from './decorators';
+import { UixComponent } from './ui/component/Component';
 import {
   DecorationType,
   applyDecoration,
@@ -7,7 +9,6 @@ import {
   markReactive,
   setRaw
 } from '@uixjs/reactivity';
-import { UixComponent } from './ui/component/Component';
 
 class Controller<TProps = any, TExports = any, TShared = any, TAttributes extends string = any> {
   isMounted: boolean = false;
@@ -32,11 +33,16 @@ class Controller<TProps = any, TExports = any, TShared = any, TAttributes extend
   }
 
   $init() {
+    applyControllerDecorations(this);
     this.init();
     applyDecorations(this);
+    this.postInit();
+    applyProvideDecorations(this);
   }
 
   protected init() {}
+
+  protected postInit() {}
 
   $onFirstMount() {
     this.isMounted = true;

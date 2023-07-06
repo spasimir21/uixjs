@@ -35,7 +35,8 @@ function EffectDecorator(target: any, prop: string | number | symbol, dependenci
 function Effect<T>(dependencies: (target: T) => any): (target: any, prop: string | number | symbol) => void;
 function Effect(target: any, prop: string | number | symbol): void;
 function Effect(targetOrDependencies: any, prop?: string | number | symbol) {
-  if (prop == null) return (target: any, prop: string | number | symbol) => EffectDecorator(target, prop, targetOrDependencies);
+  if (prop == null)
+    return (target: any, prop: string | number | symbol) => EffectDecorator(target, prop, targetOrDependencies);
 
   EffectDecorator(targetOrDependencies, prop);
 }
@@ -79,9 +80,29 @@ function ComputedDecorator(target: any, prop: string | number | symbol, dependen
 function Computed<T>(dependencies: (target: T) => any): (target: any, prop: string | number | symbol) => void;
 function Computed(target: any, prop: string | number | symbol): void;
 function Computed(targetOrDependencies: any, prop?: string | number | symbol) {
-  if (prop == null) return (target: any, prop: string | number | symbol) => ComputedDecorator(target, prop, targetOrDependencies);
+  if (prop == null)
+    return (target: any, prop: string | number | symbol) => ComputedDecorator(target, prop, targetOrDependencies);
 
   ComputedDecorator(targetOrDependencies, prop);
 }
 
-export { State, Effect, Computed };
+function DependencyDecorator(target: any, prop: string | number | symbol, initializer?: (target: any) => any) {
+  // if applied on static property
+  if (typeof target === 'function') {
+    applyDecoration(target, prop, { type: DecorationType.Dependency, data: initializer });
+    return;
+  }
+
+  addDecoration(target, prop, DecorationType.Dependency, initializer);
+}
+
+function Dependency<T>(initializer: (target: T) => any): (target: any, prop: string | number | symbol) => void;
+function Dependency(target: any, prop: string | number | symbol): void;
+function Dependency(targetOrInitializer: any, prop?: string | number | symbol) {
+  if (prop == null)
+    return (target: any, prop: string | number | symbol) => DependencyDecorator(target, prop, targetOrInitializer);
+
+  DependencyDecorator(targetOrInitializer, prop);
+}
+
+export { State, Effect, Computed, Dependency };

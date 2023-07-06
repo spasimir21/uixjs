@@ -11,12 +11,12 @@ class ReactiveSet<T> extends Set<T> {
 
   constructor(private readonly set: Set<T>) {
     super();
-    const reactiveItems = [];
+    // const reactiveItems = [];
 
-    for (const item of this.set) reactiveItems.push(reactive(item));
+    // for (const item of this.set) reactiveItems.push(reactive(item));
 
-    this.set.clear();
-    for (const item of reactiveItems) this.set.add(item);
+    // this.set.clear();
+    // for (const item of reactiveItems) this.set.add(item);
   }
 
   override get size() {
